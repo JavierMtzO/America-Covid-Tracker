@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { Text, View, StyleSheet, Button, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
 const Canada = () => {
@@ -15,42 +15,41 @@ const Canada = () => {
     today = today.toISOString().split('T')[0];
     sevenDays = sevenDays.toISOString().split('T')[0];
 
-    const [canadaData, setCanadaData] = useState([]);
-    const [canadaCases, setCanadaCases] = useState();
-    const [canadaDeaths, setCanadaDeaths] = useState();
-    const [canadaTotal, setCanadaTotal] = useState();
-    const getCanada = async () => {
+    const [data, setData] = useState([]);
+    const [cases, setCases] = useState();
+    const [deaths, setDeaths] = useState();
+    const [total, setTotal] = useState();
+    const getCountry = async () => {
         try {
             const response = await fetch('https://api.covid19api.com/country/canada?from=' + sevenDays + '&to=' + today);
             const json = await response.json();
-            setCanadaData(json);
+            setData(json);
         } catch (error) {
             console.error(error);
         }
     }
-    const getCanadaData = async () => {
+    const getData = async () => {
         try {
-            setCanadaCases(canadaData[canadaData.length - 1].Confirmed - canadaData[0].Confirmed);
-            setCanadaDeaths(canadaData[canadaData.length - 1].Deaths);
-            setCanadaTotal(canadaData[canadaData.length - 1].Confirmed);
+            setCases(data[data.length - 1].Confirmed - data[0].Confirmed);
+            setDeaths(data[data.length - 1].Deaths);
+            setTotal(data[data.length - 1].Confirmed);
         } catch (error) {
             console.error(error);
         }
     }
     useEffect(() => {
-        getCanada();
+        getCountry();
     }, []);
     useEffect(() => {
-        getCanadaData();
-    }, [canadaData]);
+        getData();
+    }, [data]);
     return (
         <View style={styles.container}>
+            <Image source={require('../images/flags/canada.png')} />
             <Text style={styles.title}> Canada</Text>
-            <Text> {canadaCases} Cases confirmed</Text>
-            <Text> {canadaDeaths} Total Deaths</Text>
-            <Text> {canadaTotal} Total Cases</Text>
-            {/* <Text> {canadaData[5].Deaths} </Text>
-            <Text> {canadaData[5].Confirmed} </Text> */}
+            <Text> {cases} Cases confirmed</Text>
+            <Text> {deaths} Total Deaths</Text>
+            <Text> {total} Total Cases</Text>
             <Button
                 onPress={gotToMap}
                 title="Return to Map"

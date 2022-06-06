@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet, Button, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
-const Mexico = () => {
+const Paraguay = () => {
     const gotToMap = () => {
         Actions.map()
     }
@@ -21,7 +21,7 @@ const Mexico = () => {
     const [total, setTotal] = useState();
     const getCountry = async () => {
         try {
-            const response = await fetch('https://api.covid19api.com/country/mexico?from=' + sevenDays + '&to=' + today);
+            const response = await fetch('https://api.covid19api.com/country/paraguay?from=' + sevenDays + '&to=' + today);
             const json = await response.json();
             setData(json);
         } catch (error) {
@@ -45,8 +45,8 @@ const Mexico = () => {
     }, [data]);
     return (
         <View style={styles.container}>
-            <Image source={require('../images/flags/mexico.png')} />
-            <Text style={styles.title}> Mexico</Text>
+            <Image source={require('../images/flags/paraguay.png')} />
+            <Text style={styles.title}> Paraguay</Text>
             <Text> {cases} Cases confirmed</Text>
             <Text> {deaths} Total Deaths</Text>
             <Text> {total} Total Cases</Text>
@@ -57,7 +57,7 @@ const Mexico = () => {
         </View>
     )
 }
-export default Mexico
+export default Paraguay
 
 const styles = StyleSheet.create({
     container: {

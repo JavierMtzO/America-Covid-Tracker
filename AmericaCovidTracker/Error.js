@@ -2,26 +2,25 @@ import React from 'react'
 import { TouchableOpacity, Text, View, StyleSheet, Button, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
-const Home = () => {
-    const gotToMap = () => {
-        Actions.map()
+const apiError = () => {
+    const goToHome = () => {
+        Actions.home()
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.title}> Welcome to the America Covid Tracker</Text>
-            <Button
-                onPress={gotToMap}
-                title="Got to Map"
-            />
+            <TouchableOpacity onPress={goToHome}>
+                <Text> Return home </Text>
+            </TouchableOpacity>
+            <Text style={styles.title}> Cannot connect to the API :(</Text>
         </View>
     )
 }
-export default Home
+export default apiError
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F46624',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
     },

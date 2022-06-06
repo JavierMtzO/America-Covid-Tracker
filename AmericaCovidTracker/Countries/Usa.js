@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { Text, View, StyleSheet, Button, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
 const Usa = () => {
@@ -9,12 +9,11 @@ const Usa = () => {
 
     return (
         <View style={styles.container}>
+            <Image source={require('../images/flags/usa.png')} />
             <Text style={styles.title}> USA </Text>
             <Text> 482057 Cases confirmed</Text>
             <Text> 987017 Total Deaths</Text>
             <Text> 80510662 Total Cases</Text>
-            {/* <Text> {canadaData[5].Deaths} </Text>
-            <Text> {canadaData[5].Confirmed} </Text> */}
             <Button
                 onPress={gotToMap}
                 title="Return to Map"
